@@ -1,0 +1,83 @@
+===================
+PSSDiag for BizTalk
+===================
+
+PSSDiag for BizTalk is a troubleshooting tool for Microsoft support engineers to capture diagnostic data.
+
+
+It captures:
+============
+1) BizTalk trace
+2) BizTalk HAT information
+3) Event logs
+4) Performance logs
+5) BizTalk registry
+6) Attributes (version, size, and modified date etc ) of BizTalk executables
+7) BizTalk hotfix information
+8) MSinfo about hardware etc.
+
+
+Usage:
+======
+1) Download the Tracelog.exe file.
+   a. Visit the following Microsoft Platform SDK download Web site: 
+http://go.microsoft.com/fwlink/?LinkId=21975 
+b. Start the Platform SDK Web installation program
+c. When you are prompted, choose the option for a custom installation.
+d. In the Custom Installation dialog box, click to clear all the available features.
+e. Expand the Microsoft Windows Core SDK feature, and then expand the Tools feature.
+f. Choose the Tools feature, and then click Will be installed on local hard drive.
+g. Click Next, and then click Next again to start the installation.
+h. Click on No if the installation asks you to restart the server at then end of the installation.
+i. Locate the Bin folder under the Microsoft Platform SDK folder, and then copy the Tracelog.exe file to Support folder under the Microsoft BizTalk Server 2006 installation folder.
+2) Open a command prompt and go to the Support folder, and run “PSSDiag.exe /G”. 
+3) Specify the trace level when prompted: -high, -all, or enter.
+4) Reproduce the issue.
+5) Use Ctrl+C in the command prompt to stop the PSSDiag.
+6) Log files are created in a subfolder called “Output”. 
+
+
+
+
+=========================================================
+BizTalk Server 2006 Assembly Checker and Remote GAC Tool
+=========================================================
+
+Description:  
+=============
+This tool is designed to check the versions of Assemblies that have been deployed in a BizTalk 2006 Environment and to make sure the correct versions are registered in the GAC when you have a multiple BizTalk Servers in a Management DB.  When you are using multiple machines in a BizTalk Server 2006 environment, it is very important to make sure the same version of the Assembly has been deployed to all the machines.
+You can also use this tool to selectively deploy the Assemblies to the remote servers using the GAC Tool. 
+
+
+
+Requirements:
+=============
+The user must be logged in with an Administrator account and the account must have DBO access to the ManagementDB on the SQL machine and Administrator Access to all remote BizTalk Server Machines. This tool must be run from a machine that has BizTalk Server 2006 installed.
+
+
+
+Disclaimer:
+============
+This sample can be used as a basis for developing your own BizTalk Server 2006 Administration code. Microsoft does not provide any samples or code that is to be used in production environments.  Our samples are for illustration purposes only and should be used as a basis for developing production solutions.  Microsoft makes no warranties expressed, implied, including, without limitation, regarding the reliability of this code sample.
+
+
+
+Feature List:
+==============
+- Can be run from any BTS 2006 Server
+- Will enumerate Assemblies that have been deployed to the ManagementDB
+- Will enumerate all Servers that are members of a ManagementDB
+- Will allow the user to selective choose which Assemblies to check across one or more servers.
+- Utilizes WMI to verify that each selected Assembly is registered on each of the selected servers.
+- Outputs details of each Assembly to a RichText control and allows you to save results to file.
+- Allows the user to copy Assemblies to the server(s) that do not have them on the Server.
+- Allows the user to register the Assemblies on the server(s) that do not have them registered.
+
+
+Additional Notes:
+==================
+When you select the "Save to File" button, it will save the results to C:\BTSAssemblyCheck_Log.rtf.  If you opt to copy/register the Assemblies to/on a server, the Assembles are copied to the root drive of where Visual Studio is installed, in a directory called BTS24K_Assembly_Checker.  For example, the location might be C:\BTS24K_Assembly_Checker.  
+
+When the tool registers the Assemblies, I do this through a WMI (Win32_Process) call and I execute the GACAssembly.bat file, which registers all the DLLs in the directory in the GAC.
+
+
